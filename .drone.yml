@@ -21,8 +21,6 @@ steps:
   environment:
     DOCKER_TOKEN:
       from_secret: DOCKER_TOKEN_AKESTER
-  depends_on:
-    - build
   commands:
     - make push-remote
 
