@@ -98,12 +98,4 @@ class php::fpm (
       Package["php${version}-fpm"]
     ],
   }
-
-  # Start script
-  file { '/start.sh':
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    content => template('php/start.sh.erb'),
-  }
 }
