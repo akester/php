@@ -89,7 +89,7 @@ class php::fpm (
       Package["php${version}-fpm"]
     ],
   }
-  file { '/etc/php/${version}/fpm/php-fpm.conf':
+  file { "/etc/php/${version}/fpm/php-fpm.conf":
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
