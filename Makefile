@@ -6,6 +6,7 @@ compress: init
 
 init:
 	packer init .
+	bolt module install
 
 only-8.1: compress
 	packer build --only=docker.php8-1 .
