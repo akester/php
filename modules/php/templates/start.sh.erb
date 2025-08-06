@@ -1,0 +1,6 @@
+#!/bin/sh -e
+exec 2>&1
+
+echo "Starting FPM..."
+
+exec /usr/sbin/php-fpm<%= @version %> -F

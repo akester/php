@@ -1,21 +1,33 @@
 source "docker" "php8-1" {
   commit = true
   image  = "debian:12"
+  changes = [
+    "CMD [\"/start.sh\"]"
+  ]
 }
 
 source "docker" "php8-2" {
   commit = true
   image  = "debian:12"
+  changes = [
+    "CMD [\"/start.sh\"]"
+  ]
 }
 
 source "docker" "php8-3" {
   commit = true
   image  = "debian:12"
+  changes = [
+    "CMD [\"/start.sh\"]"
+  ]
 }
 
 source "docker" "php8-4" {
   commit = true
   image  = "debian:12"
+  changes = [
+    "CMD [\"/start.sh\"]"
+  ]
 }
 
 ####
