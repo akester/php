@@ -2,6 +2,7 @@ build: compress
 	packer build .
 
 compress: init
+	rm -f puppet.tar.gz
 	tar -czvf puppet.tar.gz *.pp modules .modules
 
 init:
