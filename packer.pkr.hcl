@@ -139,7 +139,7 @@ build {
       "rm -rf /var/cache/puppet/state",
 
       # Clean up caches on the system
-      "apt-get remote -y puppet",
+      "apt-get remove -y puppet",
       "apt-get clean",
       "apt-get autoclean",
       "rm -rf /tmp/*",
