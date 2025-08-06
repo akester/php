@@ -16,8 +16,6 @@ class base::base {
   $packages = [
     'bash',
     'wget',
-    'vim',
-    'nano',
     'gnupg2',
   ]
   package { $packages:
