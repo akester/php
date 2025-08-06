@@ -24,4 +24,7 @@ login:
 	echo '${DOCKER_TOKEN}' | docker login --username akester --password-stdin
 
 push-remote: login
-	docker push akester/containername:latest
+	docker push akester/php:8.1
+	docker push akester/php:8.2
+	docker push akester/php:8.3
+	docker push akester/php:8.4
