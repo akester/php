@@ -17,6 +17,11 @@ class base::base {
     'bash',
     'wget',
     'gnupg2',
+
+    # In case we jump into a pod to troubleshoot
+    'vim',
+    'nano',
+    'strace',
   ]
   package { $packages:
     ensure => 'present',
