@@ -50,8 +50,6 @@ build {
       "set -e",
       "set -x",
 
-      // "echo 'Acquire::http::proxy \"http://cache.kester.cloud:3142\";' | tee /etc/apt/apt.conf.d/01proxy",
-
       "apt-get update",
       "apt-get -y dist-upgrade",
 
@@ -136,9 +134,6 @@ build {
     inline = [
       "set -e",
       "set -x",
-
-      "rm -f /etc/apt/apt.conf.d/01proxy",
-      "apt-get update",
 
       # Clean up stuff that gets left behind
       "rm -rf /var/cache/puppet/state",
