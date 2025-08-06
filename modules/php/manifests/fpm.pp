@@ -28,4 +28,45 @@ class php::fpm (
       Exec['download-fpm-apt-key']
     ],
   }
+
+  package { "php${version}-fpm":
+    ensure  => 'present',
+    require => [
+      Apt::Source['sury-php']
+    ],
+  }
+
+  $packages = [
+    "php${version}",
+    "php${version}-mysql",
+    "php${version}-opcache",
+    "php${version}-cli",
+    "php${version}-gd",
+    "php${version}-mbstring",
+    "php${version}-zip",
+    "php${version}-curl",
+    "php${version}-xml",
+    "php${version}-bcmath",
+    "php${version}-gmp",
+    "php${version}-common",
+    "php${version}-sqlite",
+    "php${version}-intl",
+    'php-pear',
+  ]
+  package { $packages:
+    ensure  => 'present',
+    require => [
+      Package["php${version}-fpm"]
+    ],
+  }
+
+  $other_packages = [
+    'python3',
+    'python3-requests',
+    'python3-dotenv',
+    'python3-praw',
+  ]
+  package { $other_packages:
+    ensure  => 'present',
+  }
 }
