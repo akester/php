@@ -69,4 +69,33 @@ class php::fpm (
   package { $other_packages:
     ensure  => 'present',
   }
+
+  # Add some base config files
+  file { "/etc/php/${version}/fpm/php.ini":
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/fpm/php.ini',
+    require => [
+      Package["php${version}-fpm"]
+    ],
+  }
+  file { "/etc/php/${version}/fpm/pool.d/www.conf":
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/fpm/www.conf',
+    require => [
+      Package["php${version}-fpm"]
+    ],
+  }
+  file { '/etc/php/${version}/fpm/php-fpm.conf':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/fpm/php-fpm.conf',
+    require => [
+      Package["php${version}-fpm"]
+    ],
+  }
 }
