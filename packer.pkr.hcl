@@ -2,7 +2,7 @@ source "docker" "php8-1" {
   commit = true
   image  = "debian:12"
   changes = [
-    "CMD [\"/usr/sbin/php-fpm8.1 -F\"]"
+    "CMD [\"/usr/sbin/php-fpm8.1\", \"-F\"]"
   ]
 }
 
@@ -10,7 +10,7 @@ source "docker" "php8-2" {
   commit = true
   image  = "debian:12"
   changes = [
-    "CMD [\"/usr/sbin/php-fpm8.2 -F\"]"
+    "CMD [\"/usr/sbin/php-fpm8.2\", \"-F\"]"
   ]
 }
 
@@ -18,7 +18,7 @@ source "docker" "php8-3" {
   commit = true
   image  = "debian:12"
   changes = [
-    "CMD [\"/usr/sbin/php-fpm8.3 -F\"]"
+    "CMD [\"/usr/sbin/php-fpm8.3\", \"-F\"]"
   ]
 }
 
@@ -26,7 +26,7 @@ source "docker" "php8-4" {
   commit = true
   image  = "debian:12"
   changes = [
-    "CMD [\"/usr/sbin/php-fpm8.4 -F\"]"
+    "CMD [\"/usr/sbin/php-fpm8.4\", \"-F\"]"
   ]
 }
 
