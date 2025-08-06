@@ -4,18 +4,9 @@ type: exec
 name: build
 
 steps:
-- name: build-8.1
+- name: build
   commands:
-    - make only-8.1
-- name: build-8.2
-  commands:
-    - make only-8.2
-- name: build-8.3
-  commands:
-    - make only-8.3
-- name: build-8.4
-  commands:
-    - make only-8.4
+    - make
 
 - name: push-remote
   environment:

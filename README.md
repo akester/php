@@ -13,9 +13,9 @@ example `akester/php:8.4`.
 
 ## Building
 
-This container is built using Packer.  Running `make` will build all the images
-at the same time.  You can also do `make only-8.4` to build only version 8.4,
-for example.
+This container is built using Packer.  Running `make` will build all the images,
+or `make build-all` to build them all at the same time.  You can also do `make
+only-8.4` to build only version 8.4, for example.
 
 The work in the container is done via Puppet.  This is overkill, but simplifies
 a number of operations and ordering.  Add things to the manifests to get them

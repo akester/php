@@ -1,4 +1,7 @@
 build: compress
+	packer build . -parallel-builds=1
+
+build-all: compress
 	packer build .
 
 compress: init
