@@ -75,7 +75,7 @@ class php::fpm (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/fpm/php.ini',
+    source  => 'puppet:///modules/php/php.ini',
     require => [
       Package["php${version}-fpm"]
     ],
@@ -84,7 +84,7 @@ class php::fpm (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/fpm/www.conf',
+    source  => 'puppet:///modules/php/www.conf',
     require => [
       Package["php${version}-fpm"]
     ],
@@ -93,7 +93,7 @@ class php::fpm (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/fpm/php-fpm.conf',
+    source  => 'puppet:///modules/php/php-fpm.conf',
     require => [
       Package["php${version}-fpm"]
     ],
