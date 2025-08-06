@@ -1,0 +1,6 @@
+puppet.tar.gz
+.modules
+bolt-debug.log
+.plan_cache.json
+.task_cache.json
+.resource_types
