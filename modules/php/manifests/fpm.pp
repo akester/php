@@ -93,7 +93,7 @@ class php::fpm (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/php/php-fpm.conf',
+    content => template('php/php-fpm.conf.erb'),
     require => [
       Package["php${version}-fpm"]
     ],
