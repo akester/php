@@ -22,6 +22,11 @@ class base::base {
     'vim',
     'nano',
     'strace',
+
+    # Other tools for crons and external work
+    'wget',
+    'curl',
+    'htop',
   ]
   package { $packages:
     ensure => 'present',
