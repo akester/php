@@ -24,7 +24,6 @@ class base::base {
     'strace',
 
     # Other tools for crons and external work
-    'wget',
     'curl',
     'htop',
   ]
