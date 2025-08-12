@@ -15,14 +15,26 @@ init:
 only-8.1: compress
 	packer build --only=docker.php8-1 .
 
+only-8.1-ssh: compress
+	packer build --only=docker.php8-1-ssh .
+
 only-8.2: compress
 	packer build --only=docker.php8-2 .
+
+only-8.2-ssh: compress
+	packer build --only=docker.php8-2-ssh .
 
 only-8.3: compress
 	packer build --only=docker.php8-3 .
 
+only-8.3-ssh: compress
+	packer build --only=docker.php8-3-ssh .
+
 only-8.4: compress
 	packer build --only=docker.php8-4 .
+
+only-8.4-ssh: compress
+	packer build --only=docker.php8-4-ssh .
 
 login:
 	echo '${DOCKER_TOKEN}' | docker login --username akester --password-stdin

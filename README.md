@@ -11,6 +11,23 @@ overwrite lots of code:
 Each supported version of PHP is built, and they are all tagged as such, for
 example `akester/php:8.4`.
 
+## SSH
+
+These containers also are built in an SSH variant that includes all the usual
+PHP stuff _and_ OpenSSH Server.  The idea here is to give a shell for remote CI
+to connect to that has the same PHP Environment for automated code deployments,
+clearing caches, or manual troubleshooting.
+
+To use one of those, use `akester/php:8.4-ssh` and provide a public key(s) that
+should be allowed in via the `SSH_AUTHORIZED_KEYS` variable.  This will be
+written to an authorized keys file for the non-root user to allow access.  I
+recommend using some proxy in front of this set up, such as SSH Piper or the
+like.
+
+These are kept in separate containers so that the main application container
+doesn't have the extra components installed and hopefully reduce any attack
+surface within the container.
+
 ## Building
 
 This container is built using Packer.  Running `make` will build all the images,
