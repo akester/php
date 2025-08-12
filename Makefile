@@ -41,6 +41,10 @@ login:
 
 push-remote: login
 	docker push akester/php:8.1
+	docker push akester/php:8.1-ssh
 	docker push akester/php:8.2
+	docker push akester/php:8.2-ssh
 	docker push akester/php:8.3
+	docker push akester/php:8.3-ssh
 	docker push akester/php:8.4
+	docker push akester/php:8.4-ssh
