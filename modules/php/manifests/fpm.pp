@@ -60,16 +60,6 @@ class php::fpm (
     ],
   }
 
-  $other_packages = [
-    'python3',
-    'python3-requests',
-    'python3-dotenv',
-    'python3-praw',
-  ]
-  package { $other_packages:
-    ensure  => 'present',
-  }
-
   # Add some base config files
   file { "/etc/php/${version}/fpm/php.ini":
     owner   => 'root',
