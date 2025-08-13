@@ -26,7 +26,7 @@ fi
 
 
 # Start SSH, but keep around so we can kill it when the container needs to stop.
-/usr/sbin/sshd\ -D -e &
+/usr/sbin/sshd -D -e &
 PID=$!
 
 trap "kill $PID 2>/dev/null" EXIT
