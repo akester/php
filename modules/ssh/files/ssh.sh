@@ -5,6 +5,8 @@ set -x
 
 KEY="$AUTHORIZED_KEY_FILE"
 
+mkdir -p /run/sshd
+
 if [ "$KEY" = "" ]; then
     echo "No authorized keys were provided, this container won't be accessible."
 fi
