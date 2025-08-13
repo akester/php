@@ -27,6 +27,12 @@ class base::base {
     'curl',
     'htop',
     'rsync',
+    'dnsutils',
+    'inetutils-ping',
+    'host',
+    'net-tools',
+    'less',
+    'git',
   ]
   package { $packages:
     ensure => 'present',
