@@ -26,6 +26,7 @@ class base::base {
     # Other tools for crons and external work
     'curl',
     'htop',
+    'rsync',
   ]
   package { $packages:
     ensure => 'present',
