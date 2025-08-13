@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-set -x
 
 KEY="$AUTHORIZED_KEY_FILE"
 
@@ -26,6 +25,7 @@ if [ ! -f "/etc/ssh/ssh_host_rsa_key" ]; then
     ssh-keygen -q -N "" -t ed25519 -f /etc/ssh/ssh_host_ed25519_key
 fi
 
+set -x
 
 # Start SSH, but keep around so we can kill it when the container needs to stop.
 /usr/sbin/sshd -D -e &
