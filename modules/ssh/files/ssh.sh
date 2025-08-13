@@ -16,6 +16,15 @@ chmod 0700 /home/web/.ssh
 echo "$KEY" > /home/web/.ssh/authorized_keys
 chmod 644 /home/web/.ssh/authorized_keys
 
+# Generate host keys if we don't have them.
+if [ ! -f "/etc/ssh/ssh_host_rsa_key" ]; then
+    echo "Generating SSH host keys..."
+    ssh-keygen -q -N "" -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key
+    ssh-keygen -q -N "" -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key
+    ssh-keygen -q -N "" -t ed25519 -f /etc/ssh/ssh_host_ed25519_key
+fi
+
+
 # Start SSH, but keep around so we can kill it when the container needs to stop.
 /usr/sbin/sshd\ -D -e &
 PID=$!
