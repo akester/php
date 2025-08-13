@@ -3,6 +3,9 @@ kind: pipeline
 type: exec
 name: build
 
+concurrency:
+  limit: 1
+
 steps:
 - name: build
   commands:
