@@ -1,5 +1,5 @@
 build: compress
-	packer build -parallel-builds=2 .
+	packer build -parallel-builds=3 .
 
 build-all: compress
 	packer build .
