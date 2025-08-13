@@ -10,7 +10,7 @@ source "docker" "php8-1-ssh" {
   commit = true
   image  = "debian:12"
   changes = [
-    "CMD [\"/usr/sbin/sshd\", \"-D\", \"-e\"]"
+    "CMD [\"/ssh.sh\"]"
   ]
 }
 
@@ -26,7 +26,7 @@ source "docker" "php8-2-ssh" {
   commit = true
   image  = "debian:12"
   changes = [
-    "CMD [\"/usr/sbin/sshd\", \"-D\", \"-e\"]"
+    "CMD [\"/ssh.sh\"]"
   ]
 }
 
@@ -42,7 +42,7 @@ source "docker" "php8-3-ssh" {
   commit = true
   image  = "debian:12"
   changes = [
-    "CMD [\"/usr/sbin/sshd\", \"-D\", \"-e\"]"
+    "CMD [\"/ssh.sh\"]"
   ]
 }
 
@@ -58,7 +58,7 @@ source "docker" "php8-4-ssh" {
   commit = true
   image  = "debian:12"
   changes = [
-    "CMD [\"/usr/sbin/sshd\", \"-D\", \"-e\"]"
+    "CMD [\"/ssh.sh\"]"
   ]
 }
 
