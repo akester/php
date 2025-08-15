@@ -7,6 +7,7 @@ overwrite lots of code:
 * Everything runs as a user with a UID and GID of 5000
 * Logs go to /var/log/app
 * It's a small site, so only 10 workers are allowed max.
+* The app lives in /home/web/html
 
 Each supported version of PHP is built, and they are all tagged as such, for
 example `akester/php:8.4`.
@@ -19,7 +20,7 @@ to connect to that has the same PHP Environment for automated code deployments,
 clearing caches, or manual troubleshooting.
 
 To use one of those, use `akester/php:8.4-ssh` and provide a public key(s) that
-should be allowed in via the `SSH_AUTHORIZED_KEYS` variable.  This will be
+should be allowed in via the `AUTHORIZED_KEY_FILE` variable.  This will be
 written to an authorized keys file for the non-root user to allow access.  I
 recommend using some proxy in front of this set up, such as SSH Piper or the
 like.
