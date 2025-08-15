@@ -17,7 +17,7 @@ class php::fpm (
   apt::source { 'sury-php':
     comment  => 'Sury PHP Packages',
     location => 'http://packages.sury.org/php/',
-    release  => 'bookworm',
+    release  => $facts['os']['distro']['codename'],
     repos    => 'main',
     keyring  => '/usr/share/keyrings/sury-keyring.gpg',
     include  => {
