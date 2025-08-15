@@ -16,7 +16,7 @@ source "docker" "php8-1-ssh" {
 
 source "docker" "php8-2" {
   commit = true
-  image  = "debian:12"
+  image  = "debian:13"
   changes = [
     "CMD [\"/usr/sbin/php-fpm8.2\", \"-F\"]"
   ]
@@ -24,7 +24,7 @@ source "docker" "php8-2" {
 
 source "docker" "php8-2-ssh" {
   commit = true
-  image  = "debian:12"
+  image  = "debian:13"
   changes = [
     "CMD [\"/ssh.sh\"]"
   ]
