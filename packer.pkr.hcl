@@ -1,6 +1,6 @@
 source "docker" "php8-1" {
   commit = true
-  image  = "debian:12"
+  image  = "debian:13"
   changes = [
     "CMD [\"/usr/sbin/php-fpm8.1\", \"-F\"]"
   ]
@@ -8,7 +8,7 @@ source "docker" "php8-1" {
 
 source "docker" "php8-1-ssh" {
   commit = true
-  image  = "debian:12"
+  image  = "debian:13"
   changes = [
     "CMD [\"/ssh.sh\"]"
   ]
@@ -32,7 +32,7 @@ source "docker" "php8-2-ssh" {
 
 source "docker" "php8-3" {
   commit = true
-  image  = "debian:12"
+  image  = "debian:13"
   changes = [
     "CMD [\"/usr/sbin/php-fpm8.3\", \"-F\"]"
   ]
@@ -40,7 +40,7 @@ source "docker" "php8-3" {
 
 source "docker" "php8-3-ssh" {
   commit = true
-  image  = "debian:12"
+  image  = "debian:13"
   changes = [
     "CMD [\"/ssh.sh\"]"
   ]
@@ -48,7 +48,7 @@ source "docker" "php8-3-ssh" {
 
 source "docker" "php8-4" {
   commit = true
-  image  = "debian:12"
+  image  = "debian:13"
   changes = [
     "CMD [\"/usr/sbin/php-fpm8.4\", \"-F\"]"
   ]
@@ -56,7 +56,7 @@ source "docker" "php8-4" {
 
 source "docker" "php8-4-ssh" {
   commit = true
-  image  = "debian:12"
+  image  = "debian:13"
   changes = [
     "CMD [\"/ssh.sh\"]"
   ]
