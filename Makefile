@@ -39,12 +39,18 @@ only-8.4-ssh: compress
 login:
 	echo '${DOCKER_TOKEN}' | docker login --username akester --password-stdin
 
-push-remote: login
+push-8.1: login
 	docker push akester/php:8.1
 	docker push akester/php:8.1-ssh
+
+push-8.2: login
 	docker push akester/php:8.2
 	docker push akester/php:8.2-ssh
+
+push-8.3: login
 	docker push akester/php:8.3
 	docker push akester/php:8.3-ssh
+
+push-8.4: login
 	docker push akester/php:8.4
 	docker push akester/php:8.4-ssh

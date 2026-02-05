@@ -1,13 +1,42 @@
 stages:
   - build
-  - deploy
 
-build:
+build-8.1:
   stage: build
   tags:
     - exec
   script:
-    - make
-    - make push-remote
+    - make only-8.1
+    - make push-8.1
+  only:
+    - master
+
+build-8.2:
+  stage: build
+  tags:
+    - exec
+  script:
+    - make only-8.2
+    - make push-8.2
+  only:
+    - master
+
+build-8.3:
+  stage: build
+  tags:
+    - exec
+  script:
+    - make only-8.3
+    - make push-8.3
+  only:
+    - master
+
+build-8.4:
+  stage: build
+  tags:
+    - exec
+  script:
+    - make only-8.4
+    - make push-8.4
   only:
     - master
