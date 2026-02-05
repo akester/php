@@ -11,6 +11,16 @@ build-8.1:
   only:
     - master
 
+build-8.1-ssh:
+  stage: build
+  tags:
+    - exec
+  script:
+    - make only-8.1-ssh
+    - make push-8.1-ssh
+  only:
+    - master
+
 build-8.2:
   stage: build
   tags:
@@ -18,6 +28,16 @@ build-8.2:
   script:
     - make only-8.2
     - make push-8.2
+  only:
+    - master
+
+build-8.2-ssh:
+  stage: build
+  tags:
+    - exec
+  script:
+    - make only-8.2-ssh
+    - make push-8.2-ssh
   only:
     - master
 
@@ -31,6 +51,16 @@ build-8.3:
   only:
     - master
 
+build-8.3-ssh:
+  stage: build
+  tags:
+    - exec
+  script:
+    - make only-8.3-ssh
+    - make push-8.3-ssh
+  only:
+    - master
+
 build-8.4:
   stage: build
   tags:
@@ -38,5 +68,15 @@ build-8.4:
   script:
     - make only-8.4
     - make push-8.4
+  only:
+    - master
+
+build-8.4-ssh:
+  stage: build
+  tags:
+    - exec
+  script:
+    - make only-8.4-ssh
+    - make push-8.4-ssh
   only:
     - master

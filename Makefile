@@ -41,16 +41,24 @@ login:
 
 push-8.1: login
 	docker push akester/php:8.1
+
+push-8.1-ssh: login
 	docker push akester/php:8.1-ssh
 
 push-8.2: login
 	docker push akester/php:8.2
+
+push-8.2-ssh: login
 	docker push akester/php:8.2-ssh
 
 push-8.3: login
 	docker push akester/php:8.3
+
+push-8.3-ssh: login
 	docker push akester/php:8.3-ssh
 
 push-8.4: login
 	docker push akester/php:8.4
+
+push-8.4-ssh: login
 	docker push akester/php:8.4-ssh
