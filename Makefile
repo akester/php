@@ -36,6 +36,12 @@ only-8.4: compress
 only-8.4-ssh: compress
 	packer build --only=docker.php8-4-ssh .
 
+only-8.5: compress
+	packer build --only=docker.php8-5 .
+
+only-8.5-ssh: compress
+	packer build --only=docker.php8-5-ssh .
+
 login:
 	echo '${DOCKER_TOKEN}' | docker login --username akester --password-stdin
 
@@ -62,3 +68,9 @@ push-8.4: login
 
 push-8.4-ssh: login
 	docker push akester/php:8.4-ssh
+
+push-8.5: login
+	docker push akester/php:8.5
+
+push-8.5-ssh: login
+	docker push akester/php:8.5-ssh

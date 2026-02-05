@@ -39,7 +39,6 @@ class php::fpm (
   $packages = [
     "php${version}",
     "php${version}-mysql",
-    "php${version}-opcache",
     "php${version}-cli",
     "php${version}-gd",
     "php${version}-mbstring",
@@ -58,6 +57,15 @@ class php::fpm (
     require => [
       Package["php${version}-fpm"]
     ],
+  }
+
+  if $version != '8.5' {
+    package{ "php${version}-opcache":
+      ensure  => 'present',
+      require => [
+        Package["php${version}-fpm"]
+      ]
+    }
   }
 
   # Add some base config files

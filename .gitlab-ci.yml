@@ -80,3 +80,23 @@ build-8.4-ssh:
     - make push-8.4-ssh
   only:
     - master
+
+build-8.5:
+  stage: build
+  tags:
+    - exec
+  script:
+    - make only-8.5
+    - make push-8.5
+  only:
+    - master
+
+build-8.5-ssh:
+  stage: build
+  tags:
+    - exec
+  script:
+    - make only-8.5-ssh
+    - make push-8.5-ssh
+  only:
+    - master
