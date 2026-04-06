@@ -1,3 +1,3 @@
 class { 'php::fpm':
-  version => '8.3',
+  version => '8.2',
 }
