@@ -147,8 +147,8 @@ build {
     ]
 
     only = [
-      "source.docker.debian-amd64",
-      "source.docker.debian-arm64",
+      "docker.debian-amd64",
+      "docker.debian-arm64",
     ]
   }
   post-processor "docker-tag" {
@@ -158,8 +158,8 @@ build {
     ]
 
     only = [
-      "source.docker.debian-amd64-ssh",
-      "source.docker.debian-arm64-ssh",
+      "docker.debian-amd64-ssh",
+      "docker.debian-arm64-ssh",
     ]
   }
 }
