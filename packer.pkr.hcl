@@ -145,22 +145,6 @@ build {
     tags = [
       "${source.name}-${var.container_version}",
     ]
-
-    only = [
-      "docker.debian-amd64",
-      "docker.debian-arm64",
-    ]
-  }
-  post-processor "docker-tag" {
-    repository = "akester/php"
-    tags = [
-      "${source.name}-${var.container_version}-ssh",
-    ]
-
-    only = [
-      "docker.debian-amd64-ssh",
-      "docker.debian-arm64-ssh",
-    ]
   }
 }
 
