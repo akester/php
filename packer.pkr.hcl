@@ -109,8 +109,8 @@ build {
     ]
 
     only           = [
-      "source.docker.debian-amd64-ssh",
-      "source.docker.debian-arm64-ssh",
+      "docker.debian-amd64-ssh",
+      "docker.debian-arm64-ssh",
     ]
     inline_shebang = "/bin/bash -e"
   }
