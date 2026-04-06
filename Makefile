@@ -8,11 +8,11 @@ build-arm: compress
 
 push-x86: login
 	docker push $(IMAGE_NAME):debian-amd64-$(CI_COMMIT_BRANCH)
-	docker push $(IMAGE_NAME):debian-amd64-$(CI_COMMIT_BRANCH)-ssh
+	docker push $(IMAGE_NAME):debian-amd64-ssh-$(CI_COMMIT_BRANCH)
 
 push-arm: login
 	docker push $(IMAGE_NAME):debian-arm64-$(CI_COMMIT_BRANCH)
-	docker push $(IMAGE_NAME):debian-arm64-$(CI_COMMIT_BRANCH)-ssh
+	docker push $(IMAGE_NAME):debian-arm64-ssh-$(CI_COMMIT_BRANCH)
 
 
 init:
@@ -33,6 +33,6 @@ push-manifest: login
 	docker manifest annotate $(IMAGE_NAME):$(CI_COMMIT_BRANCH) $(IMAGE_NAME):debian-arm64-$(CI_COMMIT_BRANCH) --os linux --arch arm64
 	docker manifest push --purge $(IMAGE_NAME):$(CI_COMMIT_BRANCH)
 
-	docker manifest create $(IMAGE_NAME):$(CI_COMMIT_BRANCH)-ssh $(IMAGE_NAME):debian-amd64-$(CI_COMMIT_BRANCH)-ssh $(IMAGE_NAME):debian-arm64-$(CI_COMMIT_BRANCH)-ssh
-	docker manifest annotate $(IMAGE_NAME):$(CI_COMMIT_BRANCH)-ssh $(IMAGE_NAME):debian-arm64-$(CI_COMMIT_BRANCH)-ssh --os linux --arch arm64
+	docker manifest create $(IMAGE_NAME):$(CI_COMMIT_BRANCH)-ssh $(IMAGE_NAME):debian-amd64-ssh-$(CI_COMMIT_BRANCH) $(IMAGE_NAME):debian-arm64-ssh-$(CI_COMMIT_BRANCH)
+	docker manifest annotate $(IMAGE_NAME):$(CI_COMMIT_BRANCH)-ssh $(IMAGE_NAME):debian-arm64-ssh-$(CI_COMMIT_BRANCH) --os linux --arch arm64
 	docker manifest push --purge $(IMAGE_NAME):$(CI_COMMIT_BRANCH)-ssh
