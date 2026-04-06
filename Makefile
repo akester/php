@@ -1,10 +1,10 @@
 IMAGE_NAME=akester/php
 
 build-x86: compress
-	packer build --only=docker.debian-amd64 .
+	packer build --only='*amd64*' .
 
 build-arm: compress
-	packer build --only=docker.debian-arm64 .
+	packer build --only='*arm64*' .
 
 push-x86: login
 	docker push $(IMAGE_NAME):debian-amd64-$(CI_COMMIT_BRANCH)

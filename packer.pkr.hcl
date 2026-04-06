@@ -1,4 +1,4 @@
-variable "version" {
+variable "container_version" {
   type    = string
 }
 
@@ -130,7 +130,7 @@ build {
       # Clean up caches on the system
       "apt-get remove -y puppet",
       "apt-get clean",
-      "apt-get autoclean",
+      "apt-get autoremove --purge -y",
       "rm -rf /tmp/*",
       "rm -rf /opt/provision",
     ]
@@ -143,7 +143,7 @@ build {
   post-processor "docker-tag" {
     repository = "akester/php"
     tags = [
-      "${source.name}-${var.version}",
+      "${source.name}-${var.container_version}",
     ]
 
     only = [
@@ -154,7 +154,7 @@ build {
   post-processor "docker-tag" {
     repository = "akester/php"
     tags = [
-      "${source.name}-${var.version}-ssh",
+      "${source.name}-${var.container_version}-ssh",
     ]
 
     only = [
