@@ -1,102 +1,33 @@
+variables:
+  PKR_VAR_version: $CI_COMMIT_BRANCH
+  PKR_VAR_php_version: "8.5"
+
 stages:
   - build
+  - deploy
 
-build-8.1:
+build-x86:
   stage: build
   tags:
     - exec
   script:
-    - make only-8.1
-    - make push-8.1
-  only:
-    - master
+    - make build-x86
+    - make push-x86
 
-build-8.1-ssh:
+build-arm:
   stage: build
   tags:
-    - exec
+    - exec-arm
   script:
-    - make only-8.1-ssh
-    - make push-8.1-ssh
-  only:
-    - master
+    - make build-arm
+    - make push-arm
 
-build-8.2:
-  stage: build
+push-manifest:
+  stage: deploy
   tags:
     - exec
+  dependencies:
+    - build-x86
+    - build-arm
   script:
-    - make only-8.2
-    - make push-8.2
-  only:
-    - master
-
-build-8.2-ssh:
-  stage: build
-  tags:
-    - exec
-  script:
-    - make only-8.2-ssh
-    - make push-8.2-ssh
-  only:
-    - master
-
-build-8.3:
-  stage: build
-  tags:
-    - exec
-  script:
-    - make only-8.3
-    - make push-8.3
-  only:
-    - master
-
-build-8.3-ssh:
-  stage: build
-  tags:
-    - exec
-  script:
-    - make only-8.3-ssh
-    - make push-8.3-ssh
-  only:
-    - master
-
-build-8.4:
-  stage: build
-  tags:
-    - exec
-  script:
-    - make only-8.4
-    - make push-8.4
-  only:
-    - master
-
-build-8.4-ssh:
-  stage: build
-  tags:
-    - exec
-  script:
-    - make only-8.4-ssh
-    - make push-8.4-ssh
-  only:
-    - master
-
-build-8.5:
-  stage: build
-  tags:
-    - exec
-  script:
-    - make only-8.5
-    - make push-8.5
-  only:
-    - master
-
-build-8.5-ssh:
-  stage: build
-  tags:
-    - exec
-  script:
-    - make only-8.5-ssh
-    - make push-8.5-ssh
-  only:
-    - master
+    - make push-manifest

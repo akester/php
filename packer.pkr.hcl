@@ -1,28 +1,20 @@
-source "docker" "php8-1" {
+variable "version" {
+  type    = string
+}
+
+variable "php_version" {
+  type    = string
+}
+
+source "docker" "debian-amd64" {
   commit = true
   image  = "debian:13"
   changes = [
-    "CMD [\"/usr/sbin/php-fpm8.1\", \"-F\"]"
+    "CMD [\"/usr/sbin/php-fpm${var.php_version}\", \"-F\"]"
   ]
 }
 
-source "docker" "php8-1-ssh" {
-  commit = true
-  image  = "debian:13"
-  changes = [
-    "CMD [\"/ssh.sh\"]"
-  ]
-}
-
-source "docker" "php8-2" {
-  commit = true
-  image  = "debian:13"
-  changes = [
-    "CMD [\"/usr/sbin/php-fpm8.2\", \"-F\"]"
-  ]
-}
-
-source "docker" "php8-2-ssh" {
+source "docker" "debian-amd64-ssh" {
   commit = true
   image  = "debian:13"
   changes = [
@@ -30,49 +22,17 @@ source "docker" "php8-2-ssh" {
   ]
 }
 
-source "docker" "php8-3" {
+source "docker" "debian-arm64" {
   commit = true
-  image  = "debian:13"
+  image  = "arm64v8/debian:13"
   changes = [
-    "CMD [\"/usr/sbin/php-fpm8.3\", \"-F\"]"
+    "CMD [\"/usr/sbin/php-fpm${var.php_version}\", \"-F\"]"
   ]
 }
 
-source "docker" "php8-3-ssh" {
+source "docker" "debian-arm64-ssh" {
   commit = true
-  image  = "debian:13"
-  changes = [
-    "CMD [\"/ssh.sh\"]"
-  ]
-}
-
-source "docker" "php8-4" {
-  commit = true
-  image  = "debian:13"
-  changes = [
-    "CMD [\"/usr/sbin/php-fpm8.4\", \"-F\"]"
-  ]
-}
-
-source "docker" "php8-4-ssh" {
-  commit = true
-  image  = "debian:13"
-  changes = [
-    "CMD [\"/ssh.sh\"]"
-  ]
-}
-
-source "docker" "php8-5" {
-  commit = true
-  image  = "debian:13"
-  changes = [
-    "CMD [\"/usr/sbin/php-fpm8.5\", \"-F\"]"
-  ]
-}
-
-source "docker" "php8-5-ssh" {
-  commit = true
-  image  = "debian:13"
+  image  = "arm64v8/debian:13"
   changes = [
     "CMD [\"/ssh.sh\"]"
   ]
@@ -83,16 +43,10 @@ source "docker" "php8-5-ssh" {
 ####
 build {
   sources = [
-    "source.docker.php8-1",
-    "source.docker.php8-1-ssh",
-    "source.docker.php8-2",
-    "source.docker.php8-2-ssh",
-    "source.docker.php8-3",
-    "source.docker.php8-3-ssh",
-    "source.docker.php8-4",
-    "source.docker.php8-4-ssh",
-    "source.docker.php8-5",
-    "source.docker.php8-5-ssh",
+    "source.docker.debian-amd64",
+    "source.docker.debian-amd64-ssh",
+    "source.docker.debian-arm64",
+    "source.docker.debian-arm64-ssh",
   ]
 
   provisioner "shell" {
@@ -140,54 +94,9 @@ build {
       "set -e",
       "set -x",
 
-      "puppet apply /opt/provision/8.1.pp --modulepath=/opt/provision/.modules:/opt/provision/modules"
+      "puppet apply /opt/provision/php.pp --modulepath=/opt/provision/.modules:/opt/provision/modules"
     ]
 
-    only           = ["docker.php8-1", "docker.php8-1-ssh"]
-    inline_shebang = "/bin/bash -e"
-  }
-  provisioner "shell" {
-    inline = [
-      "set -e",
-      "set -x",
-
-      "puppet apply /opt/provision/8.2.pp --modulepath=/opt/provision/.modules:/opt/provision/modules"
-    ]
-
-    only           = ["docker.php8-2", "docker.php8-2-ssh"]
-    inline_shebang = "/bin/bash -e"
-  }
-  provisioner "shell" {
-    inline = [
-      "set -e",
-      "set -x",
-
-      "puppet apply /opt/provision/8.3.pp --modulepath=/opt/provision/.modules:/opt/provision/modules"
-    ]
-
-    only           = ["docker.php8-3", "docker.php8-3-ssh"]
-    inline_shebang = "/bin/bash -e"
-  }
-  provisioner "shell" {
-    inline = [
-      "set -e",
-      "set -x",
-
-      "puppet apply /opt/provision/8.4.pp --modulepath=/opt/provision/.modules:/opt/provision/modules"
-    ]
-
-    only           = ["docker.php8-4", "docker.php8-4-ssh"]
-    inline_shebang = "/bin/bash -e"
-  }
-  provisioner "shell" {
-    inline = [
-      "set -e",
-      "set -x",
-
-      "puppet apply /opt/provision/8.5.pp --modulepath=/opt/provision/.modules:/opt/provision/modules"
-    ]
-
-    only           = ["docker.php8-5", "docker.php8-5-ssh"]
     inline_shebang = "/bin/bash -e"
   }
 
@@ -199,7 +108,10 @@ build {
       "puppet apply /opt/provision/ssh.pp --modulepath=/opt/provision/.modules:/opt/provision/modules"
     ]
 
-    only           = ["docker.php8-1-ssh", "docker.php8-2-ssh", "docker.php8-3-ssh", "docker.php8-4-ssh"]
+    only           = [
+      "source.docker.debian-amd64-ssh",
+      "source.docker.debian-arm64-ssh",
+    ]
     inline_shebang = "/bin/bash -e"
   }
 
@@ -231,82 +143,24 @@ build {
   post-processor "docker-tag" {
     repository = "akester/php"
     tags = [
-      "8.1"
+      "${source.name}-${var.version}",
     ]
 
-    only = ["docker.php8-1"]
+    only = [
+      "docker-debian-amd64",
+      "docker-debian-arm64",
+    ]
   }
   post-processor "docker-tag" {
     repository = "akester/php"
     tags = [
-      "8.1-ssh"
+      "${source.name}-${var.version}-ssh",
     ]
 
-    only = ["docker.php8-1-ssh"]
-  }
-  post-processor "docker-tag" {
-    repository = "akester/php"
-    tags = [
-      "8.2"
+    only = [
+      "docker-debian-amd64-ssh",
+      "docker-debian-arm64-ssh",
     ]
-
-    only = ["docker.php8-2"]
-  }
-  post-processor "docker-tag" {
-    repository = "akester/php"
-    tags = [
-      "8.2-ssh"
-    ]
-
-    only = ["docker.php8-2-ssh"]
-  }
-  post-processor "docker-tag" {
-    repository = "akester/php"
-    tags = [
-      "8.3"
-    ]
-
-    only = ["docker.php8-3"]
-  }
-  post-processor "docker-tag" {
-    repository = "akester/php"
-    tags = [
-      "8.3-ssh"
-    ]
-
-    only = ["docker.php8-3-ssh"]
-  }
-  post-processor "docker-tag" {
-    repository = "akester/php"
-    tags = [
-      "8.4"
-    ]
-
-    only = ["docker.php8-4"]
-  }
-  post-processor "docker-tag" {
-    repository = "akester/php"
-    tags = [
-      "8.4-ssh"
-    ]
-
-    only = ["docker.php8-4-ssh"]
-  }
-  post-processor "docker-tag" {
-    repository = "akester/php"
-    tags = [
-      "8.5"
-    ]
-
-    only = ["docker.php8-5"]
-  }
-  post-processor "docker-tag" {
-    repository = "akester/php"
-    tags = [
-      "8.5-ssh"
-    ]
-
-    only = ["docker.php8-5-ssh"]
   }
 }
 

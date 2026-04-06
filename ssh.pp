@@ -1,5 +1,5 @@
 class { 'php::fpm':
-  version => '8.1',
+  version => '8.5',
 }
 
 include ssh::ssh
