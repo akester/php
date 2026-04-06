@@ -51,6 +51,7 @@ class php::fpm (
     "php${version}-sqlite",
     "php${version}-intl",
     'php-pear',
+    'composer',
   ]
   package { $packages:
     ensure  => 'present',
