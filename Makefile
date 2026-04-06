@@ -8,9 +8,12 @@ build-arm: compress
 
 push-x86: login
 	docker push $(IMAGE_NAME):debian-amd64-$(CI_COMMIT_BRANCH)
+	docker push $(IMAGE_NAME):debian-amd64-$(CI_COMMIT_BRANCH)-ssh
 
 push-arm: login
 	docker push $(IMAGE_NAME):debian-arm64-$(CI_COMMIT_BRANCH)
+	docker push $(IMAGE_NAME):debian-arm64-$(CI_COMMIT_BRANCH)-ssh
+
 
 init:
 	packer init .
