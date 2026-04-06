@@ -6,8 +6,24 @@ stages:
   - build
   - deploy
 
+bolt:
+  stage: build
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/akester/puppet
+  variables:
+    BOLT_PROJECT: '/builds/containers/php'
+  script:
+    - bolt module install
+  artifacts:
+    paths:
+      - .modules/
+      - .resource_types/
+    expire_in: 7 days
+
 build-x86:
   stage: build
+  needs:
+    - job: bolt
+      artifacts: true
   tags:
     - exec
   script:
@@ -16,6 +32,9 @@ build-x86:
 
 build-arm:
   stage: build
+  needs:
+    - job: bolt
+      artifacts: true
   tags:
     - exec-arm
   script:

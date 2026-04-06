@@ -14,6 +14,8 @@ push-arm: login
 
 init:
 	packer init .
+
+bolt: 
 	bolt module install
 
 compress: init
