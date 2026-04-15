@@ -19,4 +19,12 @@ class ssh::ssh {
     mode   => '0755',
     source => 'puppet:///modules/ssh/ssh.sh',
   }
+
+  # Extra tools for SSH debugging
+  $packages = [
+    'redis-tools',
+  ]
+  package { $packages:
+    ensure  => 'present',
+  }
 }
