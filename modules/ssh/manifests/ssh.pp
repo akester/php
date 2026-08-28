@@ -23,6 +23,7 @@ class ssh::ssh {
   # Extra tools for SSH debugging
   $packages = [
     'redis-tools',
+    'mariadb-client',
   ]
   package { $packages:
     ensure  => 'present',
