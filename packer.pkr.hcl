@@ -49,6 +49,21 @@ build {
     "source.docker.debian-arm64-ssh",
   ]
 
+  # Use the local apt cache (amd64 only), removed at the end of the build
+  provisioner "shell" {
+    only = ["docker.debian-amd64", "docker.debian-amd64-ssh"]
+    inline = [
+      "set -e",
+      "set -x",
+      "cp /etc/apt/sources.list.d/debian.sources /root/debian.sources.orig",
+      "sed -i 's#http://deb.debian.org/#http://apt.kester.cloud/#' /etc/apt/sources.list.d/debian.sources",
+      # Picked up by puppet to point the sury repo at the cache
+      "mkdir -p /etc/facter/facts.d",
+      "echo 'sury_mirror=http://apt.kester.cloud/sury-php/' > /etc/facter/facts.d/apt_cache.txt",
+    ]
+    inline_shebang = "/bin/bash -e"
+  }
+
   provisioner "shell" {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
@@ -133,6 +148,20 @@ build {
       "apt-get autoremove --purge -y",
       "rm -rf /tmp/*",
       "rm -rf /opt/provision",
+    ]
+    inline_shebang = "/bin/bash -e"
+  }
+
+  # Remove the local apt cache
+  provisioner "shell" {
+    only = ["docker.debian-amd64", "docker.debian-amd64-ssh"]
+    inline = [
+      "set -e",
+      "set -x",
+      "mv /root/debian.sources.orig /etc/apt/sources.list.d/debian.sources",
+      "sed -i 's#http://apt.kester.cloud/sury-php/#http://packages.sury.org/php/#' /etc/apt/sources.list.d/sury-php.list",
+      "rm -rf /etc/facter",
+      "rm -rf /var/lib/apt/lists/*",
     ]
     inline_shebang = "/bin/bash -e"
   }
