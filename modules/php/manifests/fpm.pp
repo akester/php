@@ -14,9 +14,10 @@ class php::fpm (
     ],
   }
 
+  # sury_mirror is set as an external fact by the packer build to use the local apt cache
   apt::source { 'sury-php':
     comment  => 'Sury PHP Packages',
-    location => 'http://packages.sury.org/php/',
+    location => pick($facts['sury_mirror'], 'http://packages.sury.org/php/'),
     release  => $facts['os']['distro']['codename'],
     repos    => 'main',
     keyring  => '/usr/share/keyrings/sury-keyring.gpg',
